@@ -3,7 +3,10 @@ package com.example.customlistview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,5 +39,16 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CustomAdapter(dataModel, getApplicationContext());
 
         listView.setAdapter(adapter);
+
+        // 4 - Handling onClick events on ListView Items
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this,
+                        adapter.getItem(position).getCountryName() +
+                        " Won " + adapter.getItem(position).getWinTitleCount() + " titles",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
